@@ -1,6 +1,6 @@
 sudo: false
 language: node_js
-node_js: "8"
+node_js: 8
 
 notifications:
   email: false
@@ -79,6 +79,13 @@ jobs:
       env: NGV=latest
     - <<: *test
       env: NGV=next
+#    test e2e-bdd
+    - stage: bdd tests
+      env: GOOGLE_CHROME_BINARY = /usr/bin/google-chrome-beta
+      before_script: google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+      script:
+      - webdriver-manager update --standalone
+      - protractor ./protractor.cucumber.js
 #    check prod build
     - &build
       stage: build

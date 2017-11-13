@@ -1,9 +1,18 @@
+const chromeOptions = {
+  args: ['--headless', '--disable-gpu', '--no-sandbox']
+};
+
+if(process.env.GOOGLE_CHROME_BINARY) {
+  chromeOptions.binary = process.env.GOOGLE_CHROME_BINARY;
+}
+
 exports.config = {
 
   baseUrl: "https://valor-software.com/ngx-bootstrap/#/",
 
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+    chromeOptions: chromeOptions
   },
 
   framework: 'custom',
@@ -22,7 +31,6 @@ exports.config = {
   const chai = require('chai');
   const chaiAsPromised = require('chai-as-promised');
   chai.use(chaiAsPromised);
-  browser.driver.manage().window().maximize();
-  browser.waitForAngularEnabled(false)
+  browser.driver.manage().window().maximize()
   }
 }
