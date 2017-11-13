@@ -79,6 +79,19 @@ jobs:
       env: NGV=latest
     - <<: *test
       env: NGV=next
+#   bdd-test-run
+    before_script:
+    - export DISPLAY=:99.0
+    - sh -e /etc/init.d/xvfb start
+    - sleep 3 # give xvfb some time to start
+    - npm run webdriver 2>&1 &
+    - sleep 3
+    - echo webdriver started
+    - npm start 2>&1 &
+    - sleep 1
+    - echo test app started
+    script:
+    - npm run e2e-bdd
 #    check prod build
     - &build
       stage: build
