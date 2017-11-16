@@ -31,6 +31,9 @@ stages:
     if: branch = development AND type = push
   - name: sauce-tests
     if: ( branch = development AND type = push ) OR type = pull_request
+  - name: bdd-tests
+    if: ( branch = development AND type = push ) OR type = pull_request
+
 
 before_install:
   - export CHROME_BIN=chromium-browser
@@ -80,7 +83,7 @@ jobs:
     - <<: *test
       env: NGV=next
 #    test e2e-bdd
-    - stage: bdd tests
+    - stage: bdd-tests
       env: GOOGLE_CHROME_BINARY = /usr/bin/google-chrome-beta
       before_script: google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
       script:

@@ -1,3 +1,5 @@
+var envUrl;
+
 const chromeOptions = {
   args: ['--headless', '--disable-gpu', '--no-sandbox']
 };
@@ -6,9 +8,14 @@ if(process.env.GOOGLE_CHROME_BINARY) {
   chromeOptions.binary = process.env.GOOGLE_CHROME_BINARY;
 }
 
-exports.config = {
+if(process.env.TRAVIS) {
+  envUrl = "ngx-bootstrap-latest.surge.sh"
+} else {
+  envUrl =  "https://valor-software.com/ngx-bootstrap/#/"
+}
 
-  baseUrl: "https://valor-software.com/ngx-bootstrap/#/",
+exports.config = {
+  baseUrl: envUrl,
 
   capabilities: {
     'browserName': 'chrome',
