@@ -1,11 +1,9 @@
-import { $, browser, ElementFinder } from 'protractor';
-import { expect } from 'chai';
+import { $, ElementFinder } from 'protractor';
+import { BasePagePo } from '../shared/pages/basePage.po';
 
-export class LandingPo {
-  pageUrl = 'https://valor-software.com/ngx-bootstrap/#/getting-started';
+
+export class LandingPo extends BasePagePo {
+  pageUrl = '';
   getStartedBtn: ElementFinder = $('.btn-primary');
-
-  assertCurrentUrlEqual(template: string) {
-    return expect(browser.getCurrentUrl()).to.eventually.equal(template);
-  }
+  githubBtn: ElementFinder = $('.btn-outline-secondary');
 }
