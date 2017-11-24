@@ -10,13 +10,13 @@ export async function waitFor(condition: Function, optMessage?: string) {
 export async function waitForClickable(button: ElementFinder) {
   message = 'Waiting for clickable ';
 
-  await waitFor(ExpectedConditions.elementToBeClickable(button), message + button.locator());
+  await waitFor(ExpectedConditions.elementToBeClickable(button), message + (button.locator() as string));
 }
 
 export async function waitForVisible(elem: ElementFinder) {
   message = 'Waiting for appearing element ';
 
-  await waitFor(ExpectedConditions.visibilityOf(elem), message + elem.locator());
+  await waitFor(ExpectedConditions.visibilityOf(elem), message + (elem.locator() as string));
 }
 
 
